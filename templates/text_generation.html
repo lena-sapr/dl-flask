@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+{% if query %}
+<left>
+<form action = "/text_generator" method = "POST">
+    <label for="prompt">Print your prompt here:</label>
+    <textarea type = "text" name = "prompt" rows="1" cols="50"  placeholder ="Print your prompt here" padding="10px"> </textarea></br>
+
+    <fieldset>
+        <legend style="font-size: 18px"> Select style:</legend>
+
+        <div>
+            <input type="radio" id="dewey" name="radio" value="no_radio">
+            <label for="dewey">Normal</label>
+          </div> 
+    
+        <div>
+          <input type="radio" id="huey" name="radio" value="use_radio"
+                 checked>
+          <label for="huey">Radio Adonezh</label>
+        </div>      
+        
+    </fieldset>
+
+    <label for="length">Length of generated text:</label>
+    <textarea type = "text" name = "length" rows="1" cols="5" padding="10px"> </textarea></br>
+
+    <label for="num_texts">Number of generated texts:</label>
+    <textarea type = "text" name = "num_texts" rows="1" cols="5" padding="10px"> </textarea></br>
+    <div>
+    <label for="temperature">Temperature (0.1 - 11 )</label>
+    <input type = "range" name="temperature" min="0.1" max="11"/>
+    </div>
+    <input type = "submit" name="generate" value="Generate!"/>
+</form>  
+</left>
+{% endif %}
+
+{% if result %}
+<br>
+<!-- <textarea type = "text" name = "text" rows="10" cols="50" padding="10px"> {{ result }} </textarea></br> -->
+<!-- {% for i in result %}        
+        <li>{{i}}
+{%endfor%}  -->
+
+<h3>{% block title %} Results {% endblock %}</h3>
+    <div style="width: 70%; margin: auto">
+        {% for res in result %}
+        <div style="padding: 10px; background-color:#EEE; margin: 20px">
+            <p style="font-size: 18px">{{ res }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+<br>
+
+
+
+{% endif %}
+
+{%endblock%}
